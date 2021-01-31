@@ -16,12 +16,12 @@
     state: present
   become: true
 
-- name: Make sure the src_dir exists
+- name: Make sure the source directory exists
   file:
     path: "{{ src_dir }}"
     state: directory
 
-- name: Check if logiops source directory exists
+- name: Make sure that the logiops source directory exists
   stat:
     path: "{{ src_dir }}/logiops"
   register: logiops_dir
