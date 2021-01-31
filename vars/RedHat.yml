@@ -1,0 +1,7 @@
+---
+dependencies:
+  - clang
+  - cmake
+  - libevdev-devel
+  - libudev-devel
+  - libconfig-devel
