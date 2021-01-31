@@ -1,0 +1,17 @@
+---
+# defaults file for ansible-role-logitech
+src_dir: "$HOME/workspace/src"
+
+ubuntu_compile_deps:
+  - clang
+  - cmake
+  - libevdev-dev
+  - libudev-dev
+  - libconfig++-dev
+
+fedora_compile_deps:
+  - clang
+  - cmake
+  - libevdev-devel
+  - libudev-devel
+  - libconfig-devel

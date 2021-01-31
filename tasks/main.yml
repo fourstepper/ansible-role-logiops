@@ -1,0 +1,73 @@
+---
+# tasks file for ansible-role-logitech
+- name: Make sure compile dependencies are solved
+  package:
+    name: "{{ ubuntu_compile_deps }}"
+    state: present
+  become: true
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Make sure compile dependencies are solved
+  package:
+    name: "{{ fedora_compile_deps }}"
+    state: present
+  become: true
+  when: ansible_facts['distribution'] == "Fedora"
+
+- name: Make sure the src_dir exists
+  file:
+    path: "{{ src_dir }}"
+    state: directory
+
+- name: Check if logiops source directory exists
+  stat:
+    path: "{{ src_dir }}/logiops"
+  register: logiops_dir
+
+- name: Copy the project from GitHub
+  git:
+    repo: https://github.com/PixlOne/logiops
+    dest: "{{ src_dir }}/logiops"
+    force: true
+    update: "{{ upgrade | default(false) }}"
+  register: new_version
+
+- name: Make sure the build directory is present
+  file:
+    path: "{{ src_dir }}/logiops/build"
+    state: directory
+
+- name: Compile logiops
+  command:
+    cmd: "cmake .."
+    chdir: "{{ src_dir }}/logiops/build"
+  when: new_version.changed
+
+- name: Install logiops
+  shell:
+    cmd: "sudo make install"
+    chdir: "{{ src_dir }}/logiops/build"
+    warn: false
+  when: new_version.changed
+
+- name: Copy the systemd service over
+  template:
+    src: files/systemd-service
+    dest: /etc/systemd/system/logid.service
+  become: true
+  when: ansible_service_mgr == 'systemd'
+  register: service
+
+- name: Copy the logid.cfg
+  template:
+    src: files/logid.cfg
+    dest: /etc/logid.cfg
+  become: true
+
+- name: Restart and enable the logid service
+  service:
+    name: logid
+    state: restarted
+    enabled: true
+  become: true
+  when: ansible_service_mgr == 'systemd' and new_version.changed
