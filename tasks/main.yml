@@ -65,9 +65,17 @@
     dest: /etc/logid.cfg
   become: true
 
-- name: Restart and enable the logid service
+- name: Make sure that logid is started
+  service:
+    name: logid
+    state: started
+    enabled: true
+  become: true
+
+- name: Restart logid
   service:
     name: logid
     state: restarted
     enabled: true
   become: true
+  when: new_version.changed
