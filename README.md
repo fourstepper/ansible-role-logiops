@@ -18,20 +18,6 @@ Dependencies
 
 None
 
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: localhost
-      vars:
-        user: "robinopletal"
-        logiops_source_repo_dir: "home/{{ user }}/Programs"
-        upgrade_system: true
-
-      roles:
-         - role: ansible-role-logiops
-
 License
 -------
 
