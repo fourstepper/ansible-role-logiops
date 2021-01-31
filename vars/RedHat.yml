@@ -1,5 +1,6 @@
 ---
 dependencies:
+  - git
   - clang
   - cmake
   - libevdev-devel
