@@ -57,7 +57,6 @@
     src: files/systemd-service
     dest: /etc/systemd/system/logid.service
   become: true
-  when: ansible_service_mgr == 'systemd'
   register: service
 
 - name: Copy the logid.cfg
@@ -72,4 +71,3 @@
     state: restarted
     enabled: true
   become: true
-  when: ansible_service_mgr == 'systemd' and new_version.changed

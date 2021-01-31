@@ -1,6 +1,8 @@
 ansible-role-logiops
 =========
 
+[![builds.sr.ht status](https://builds.sr.ht/~fourstepper/ansible-role-logiops.svg)](https://builds.sr.ht/~fourstepper/ansible-role-logiops?)
+
 This role can be used to install and configure the [logiops](https://github.com/PixlOne/logiops) drivers on Linux
 
 Requirements
