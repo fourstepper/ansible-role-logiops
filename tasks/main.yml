@@ -57,7 +57,9 @@
     src: "../../../config_files/logid/systemd-service"
     dest: /etc/systemd/system/logid.service
   become: true
-  register: service
+  register:
+    - service
+    - global_config
 
 - name: Copy the logid systemd service over (if global fails)
   template:
@@ -65,18 +67,22 @@
     dest: /etc/systemd/system/logid.service
   become: true
   register: service
+  when: global_config.failed
 
 - name: Copy the logid.cfg over from the global folder
   template:
     src: "../../..//logid/logid.cfg"
     dest: /etc/logid.cfg
   become: true
+  ignore_errors: true
+  register: global_config
 
 - name: Copy the logid.cfg over (if global fails)
   template:
     src: files/logid/logid.cfg
     dest: /etc/logid.cfg
   become: true
+  when: global_config.failed
 
 - name: Make sure that logid is started
   service:
