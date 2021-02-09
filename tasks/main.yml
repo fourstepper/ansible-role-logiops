@@ -52,16 +52,29 @@
     warn: false
   when: new_version.changed
 
-- name: Copy the systemd service over
+- name: Copy the logid systemd service over from the global folder
   template:
-    src: files/systemd-service
+    src: "../../../config_files/logid/systemd-service"
     dest: /etc/systemd/system/logid.service
   become: true
   register: service
 
-- name: Copy the logid.cfg
+- name: Copy the logid systemd service over (if global fails)
   template:
-    src: files/logid.cfg
+    src: files/logid/systemd-service
+    dest: /etc/systemd/system/logid.service
+  become: true
+  register: service
+
+- name: Copy the logid.cfg over from the global folder
+  template:
+    src: "../../..//logid/logid.cfg"
+    dest: /etc/logid.cfg
+  become: true
+
+- name: Copy the logid.cfg over (if global fails)
+  template:
+    src: files/logid/logid.cfg
     dest: /etc/logid.cfg
   become: true
 
