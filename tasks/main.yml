@@ -57,6 +57,7 @@
     src: "../../../config_files/logid/systemd-service"
     dest: /etc/systemd/system/logid.service
   become: true
+  ignore_errors: true
   register: global_config
 
 - name: Copy the logid systemd service over (if global fails)
