@@ -69,7 +69,7 @@
 
 - name: Copy the logid.cfg over from the global folder
   template:
-    src: "../../..//logid/logid.cfg"
+    src: "../../../config_files/logid/logid.cfg"
     dest: /etc/logid.cfg
   become: true
   ignore_errors: true
