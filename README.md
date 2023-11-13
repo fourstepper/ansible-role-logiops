@@ -1,26 +1,25 @@
-ansible-role-logiops
-=========
-
-[![builds.sr.ht status](https://builds.sr.ht/~fourstepper/ansible-role-logiops.svg)](https://builds.sr.ht/~fourstepper/ansible-role-logiops?)
+# ansible-role-logiops
 
 This role can be used to install and configure the [logiops](https://github.com/PixlOne/logiops) drivers on Linux
 
-Requirements
-------------
+## Archival
+
+!!! This role has been superseeded for me by [Solaar](https://github.com/pwr-Solaar/Solaar) and thus is archived. !!!
+
+---
+
+## Requirements
 
 You need to have a logid configuration (logid.cfg) present under files/logid.cfg. An example is already present, with a detailed guide on how to make one at the project's [wiki](https://github.com/PixlOne/logiops/wiki)
 
-Role Variables
---------------
+## Role Variables
 
 Please inspect defaults/main.yml and vars/main.yml for the possible variables - they should be self-explanatory.
 
-Dependencies
-------------
+## Dependencies
 
 None
 
-License
--------
+## License
 
 MIT
